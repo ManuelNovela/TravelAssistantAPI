@@ -7,6 +7,9 @@ target/
 .apt_generated
 .classpath
 .factorypath
+
+# Eclipse m2e generated files
+# Eclipse Core
 .project
 .settings
 .springBeans
