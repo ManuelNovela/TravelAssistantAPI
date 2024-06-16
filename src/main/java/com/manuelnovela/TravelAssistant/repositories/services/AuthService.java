@@ -9,7 +9,6 @@ import com.manuelnovela.TravelAssistant.infrastructure.exceptions.InvalidCredent
 import com.manuelnovela.TravelAssistant.infrastructure.exceptions.UserAlreadyExists;
 import com.manuelnovela.TravelAssistant.repositories.interfaces.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

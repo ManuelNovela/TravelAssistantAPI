@@ -3,7 +3,6 @@ package com.manuelnovela.TravelAssistant.controllers;
 import com.manuelnovela.TravelAssistant.dtos.*;
 import com.manuelnovela.TravelAssistant.repositories.services.AuthService;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -21,7 +20,7 @@ public class AuthController{
     private AuthService authService;
 
     @PostMapping("/login")
-    public ResponseEntity<RestResponseDTO>  login (@Valid @RequestBody LoginRequestDTO body){
+    public ResponseEntity<RestResponseDTO> login (@Valid @RequestBody LoginRequestDTO body){
         return authService.login(body);
     }
 
