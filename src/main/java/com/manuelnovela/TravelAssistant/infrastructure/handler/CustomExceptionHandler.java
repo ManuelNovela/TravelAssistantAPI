@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 
+
+
 @ControllerAdvice
-public class RestExceptionsHandler extends ResponseEntityExceptionHandler {
+public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(UserAlreadyExists.class)
     private ResponseEntity<RestResponseDTO> userAlreadyExistsHandler(UserAlreadyExists exception){
         return ResponseEntity.status(HttpStatus.CONFLICT).body( new RestResponseDTO(ApiStatus.ERROR, exception.getMessage()));
@@ -26,8 +28,9 @@ public class RestExceptionsHandler extends ResponseEntityExceptionHandler {
     private ResponseEntity<RestResponseDTO> usernameNotFoundExceptionHandler(UsernameNotFoundException exception){
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body( new RestResponseDTO(ApiStatus.ERROR, exception.getMessage()));
     }
+
     @ExceptionHandler(RuntimeException.class)
-    private ResponseEntity<RestResponseDTO> RuntimeExceptionHandler(RuntimeException exception){
+    private ResponseEntity<RestResponseDTO> runtimeExceptionHandler(RuntimeException exception){
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body( new RestResponseDTO(ApiStatus.ERROR, exception.getMessage()));
     }
 

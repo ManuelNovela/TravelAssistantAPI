@@ -2,6 +2,8 @@ package com.manuelnovela.TravelAssistant.infrastructure.security;
 
 
 import com.manuelnovela.TravelAssistant.domain.user.User;
+import com.manuelnovela.TravelAssistant.dtos.ApiStatus;
+import com.manuelnovela.TravelAssistant.dtos.RestResponseDTO;
 import com.manuelnovela.TravelAssistant.repositories.interfaces.UserRepository;
 import com.manuelnovela.TravelAssistant.repositories.services.TokenService;
 import jakarta.servlet.FilterChain;
@@ -9,6 +11,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -37,6 +40,7 @@ public class SecurityFilter extends OncePerRequestFilter {
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
         filterChain.doFilter(request, response);
+
     }
 
     private String recoverToken(HttpServletRequest request){
