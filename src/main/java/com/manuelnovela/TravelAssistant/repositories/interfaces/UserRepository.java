@@ -1,4 +1,4 @@
-package com.manuelnovela.TravelAssistant.repositories;
+package com.manuelnovela.TravelAssistant.repositories.interfaces;
 
 import com.manuelnovela.TravelAssistant.domain.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;

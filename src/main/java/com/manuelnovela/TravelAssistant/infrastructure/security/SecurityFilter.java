@@ -2,7 +2,8 @@ package com.manuelnovela.TravelAssistant.infrastructure.security;
 
 
 import com.manuelnovela.TravelAssistant.domain.user.User;
-import com.manuelnovela.TravelAssistant.repositories.UserRepository;
+import com.manuelnovela.TravelAssistant.repositories.interfaces.UserRepository;
+import com.manuelnovela.TravelAssistant.repositories.services.TokenService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

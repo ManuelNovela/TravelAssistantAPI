@@ -1,9 +1,9 @@
-package com.manuelnovela.TravelAssistant.controllers;
+package com.manuelnovela.TravelAssistant.repositories.services;
 
 import com.manuelnovela.TravelAssistant.dtos.ApiStatus;
 import com.manuelnovela.TravelAssistant.dtos.RestResponseDTO;
 
-public class BaseController<T> {
+public class BaseService<T> {
 
     public RestResponseDTO<T> createSucessResponse(T data)
     {

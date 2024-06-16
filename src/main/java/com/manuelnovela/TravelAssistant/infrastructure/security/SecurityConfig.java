@@ -1,5 +1,6 @@
 package com.manuelnovela.TravelAssistant.infrastructure.security;
 
+import com.manuelnovela.TravelAssistant.repositories.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,7 +20,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 
     @Autowired
-    private CustomUserDetailsService userDetailsService;
+    private UserService userDetailsService;
 
     @Autowired
     SecurityFilter securityFilter;
