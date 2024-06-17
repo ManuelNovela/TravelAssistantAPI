@@ -1,9 +1,9 @@
-package com.manuelnovela.TravelAssistant.controllers;
+package com.manuelnovela.TravelAssistant.repositories.services;
 
 import com.manuelnovela.TravelAssistant.dtos.ApiStatus;
 import com.manuelnovela.TravelAssistant.dtos.RestResponseDTO;
 
-public class BaseController<T> {
+public class BaseService<T> {
 
     public RestResponseDTO<T> createSucessResponse(T data)
     {
@@ -19,6 +19,16 @@ public class BaseController<T> {
         result.setData(data);
         return result;
     }
+<<<<<<< HEAD:src/main/java/com/manuelnovela/TravelAssistant/controllers/BaseController.java
 =======
 >>>>>>> Stashed changes:src/main/java/com/manuelnovela/TravelAssistant/repositories/services/BaseService.java
+=======
+
+    public RestResponseDTO<T> createErrorResponse(String mesage)
+    {
+        RestResponseDTO result = new RestResponseDTO(ApiStatus.ERROR);
+        result.setMessage(mesage);
+        return result;
+    }
+>>>>>>> feature/authentication:src/main/java/com/manuelnovela/TravelAssistant/repositories/services/BaseService.java
 }

@@ -1,4 +1,4 @@
-package com.manuelnovela.TravelAssistant.infrastructure.security;
+package com.manuelnovela.TravelAssistant.repositories.services;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -16,9 +16,9 @@ import java.time.ZoneOffset;
 public class TokenService {
     @Value("api.security.token.secret")
     private String secret;
-
     @Value("api.sercurity.token.Issuer")
     private String insuer;
+
     public String generateToken(User user){
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
