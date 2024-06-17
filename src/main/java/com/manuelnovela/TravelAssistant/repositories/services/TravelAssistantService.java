@@ -1,20 +1,11 @@
 package com.manuelnovela.TravelAssistant.repositories.services;
 
-<<<<<<< HEAD
 import com.manuelnovela.TravelAssistant.dtos.*;
-import com.manuelnovela.TravelAssistant.infrastructure.exceptions.UserAlreadyExists;
 import com.manuelnovela.TravelAssistant.repositories.services.thirdpartyService.wordBank.GdpIndicator;
 import com.manuelnovela.TravelAssistant.repositories.services.thirdpartyService.wordBank.PopulationIndicator;
-=======
-import com.manuelnovela.TravelAssistant.dtos.ApiStatus;
 import com.manuelnovela.TravelAssistant.dtos.GdpModelDTO;
-import com.manuelnovela.TravelAssistant.dtos.LoginResponseDTO;
 import com.manuelnovela.TravelAssistant.dtos.RestResponseDTO;
-import com.manuelnovela.TravelAssistant.infrastructure.exceptions.UserAlreadyExists;
-import com.manuelnovela.TravelAssistant.repositories.services.thirdpartyService.wordBank.GdpIndicator;
->>>>>>> feature/authentication
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
