@@ -1,6 +1,8 @@
 package com.manuelnovela.TravelAssistant.controllers;
 
 import com.manuelnovela.TravelAssistant.dtos.RestResponseDTO;
+import com.manuelnovela.TravelAssistant.dtos.WeatherDTO;
+import com.manuelnovela.TravelAssistant.infrastructure.validator.interfaces.CurrencyCode;
 import com.manuelnovela.TravelAssistant.infrastructure.validator.interfaces.ValidCountryCode;
 import com.manuelnovela.TravelAssistant.repositories.services.TravelAssistantService;
 import com.manuelnovela.TravelAssistant.repositories.services.thirdpartyService.exchangeRate.ExchangeRateService;
@@ -15,16 +17,19 @@ import org.springframework.web.bind.annotation.*;
 public class TravelAssistantController {
     @Autowired
     private TravelAssistantService travelAssistantService;
-    @Autowired
-    ExchangeRateService exchangeRateService;
 
-    @GetMapping("/weather/{city}")
-    public String getWeather(@PathVariable String city) {
-        return "Previsão do tempo para " + city;
+    @GetMapping("/weather/current/{city}")
+    public ResponseEntity<RestResponseDTO> getCurrentWeather(@PathVariable String city) {
+        return travelAssistantService.getCurrentWeather(city);
     }
 
-    @GetMapping("/exchange-rate/{base_currency}/{target_currency}")
-    public ResponseEntity<RestResponseDTO> getExchangeRate(@PathVariable String base_currency, @PathVariable String target_currency) {
+    @GetMapping("/weather/forecast/{cityId}")
+    public ResponseEntity<RestResponseDTO> getWeatherForecast(@PathVariable String cityId) {
+        return travelAssistantService.getWeatherForecast(cityId);
+    }
+
+    @GetMapping("/exchangerate/{base_currency}/{target_currency}")
+    public ResponseEntity<RestResponseDTO> getExchangeRate(@PathVariable @CurrencyCode String base_currency, @PathVariable @CurrencyCode String target_currency) {
         return travelAssistantService.getExchangeRates(base_currency, target_currency);
     }
 

@@ -2,13 +2,17 @@ package com.manuelnovela.TravelAssistant.repositories.services;
 
 import com.manuelnovela.TravelAssistant.dtos.*;
 import com.manuelnovela.TravelAssistant.repositories.services.thirdpartyService.exchangeRate.ExchangeRateService;
+import com.manuelnovela.TravelAssistant.repositories.services.thirdpartyService.openweathermap.WeatherService;
 import com.manuelnovela.TravelAssistant.repositories.services.thirdpartyService.wordBank.GdpIndicator;
 import com.manuelnovela.TravelAssistant.repositories.services.thirdpartyService.wordBank.PopulationIndicator;
 import com.manuelnovela.TravelAssistant.dtos.GdpModelDTO;
 import com.manuelnovela.TravelAssistant.dtos.RestResponseDTO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -18,6 +22,8 @@ public class TravelAssistantService extends BaseService{
     private final GdpIndicator gdpIndicator;
     private final PopulationIndicator populationIndicator;
     private final ExchangeRateService exchangeRateService;
+    private final WeatherService weatherService;
+
     public ResponseEntity<RestResponseDTO> listCountryGDP(String country){
         List<GdpModelDTO> result =  gdpIndicator.listCountryGDP(country);
         if(!result.isEmpty()){
@@ -41,6 +47,16 @@ public class TravelAssistantService extends BaseService{
         }else{
             throw new RuntimeException("Erro fetching GDP");
         }
+    }
+
+    public ResponseEntity<RestResponseDTO> getCurrentWeather(String city) {
+        RestResponseDTO<WeatherDTO> response = weatherService.getCurrentWeather(city);
+        return ResponseEntity.ok(response);
+    }
+
+    public ResponseEntity<RestResponseDTO> getWeatherForecast(String cityId) {
+        RestResponseDTO<ForecastDTO> response = weatherService.getWeatherForecast(cityId);
+        return ResponseEntity.ok(response);
     }
 
 }
