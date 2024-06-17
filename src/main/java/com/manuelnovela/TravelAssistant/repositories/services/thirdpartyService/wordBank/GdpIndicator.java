@@ -3,16 +3,8 @@ package com.manuelnovela.TravelAssistant.repositories.services.thirdpartyService
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.manuelnovela.TravelAssistant.dtos.GdpModelDTO;
-<<<<<<< HEAD
 import com.manuelnovela.TravelAssistant.repositories.services.thirdpartyService.wordBank.models.DataModel;
 import com.manuelnovela.TravelAssistant.repositories.services.thirdpartyService.wordBank.models.WorldBankResponse;
-=======
-import com.manuelnovela.TravelAssistant.dtos.RestResponseDTO;
-import com.manuelnovela.TravelAssistant.repositories.services.thirdpartyService.wordBank.models.GdpData;
-import com.manuelnovela.TravelAssistant.repositories.services.thirdpartyService.wordBank.models.WorldBankResponse;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
->>>>>>> feature/authentication
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -36,7 +28,7 @@ public class GdpIndicator {
 
             String url = WORLD_BANK_API_URL.replace("{countryCode}", countryCode) + "&page=" + currentPage;
             ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.GET, null, String.class);
-            if (responseEntity != null && responseEntity.getBody() != null) {
+            if (responseEntity.getBody() != null) {
                 String responseBody = responseEntity.getBody();
                 Object[] response = new Object[0];
                 try {
@@ -47,17 +39,10 @@ public class GdpIndicator {
 
                 if (response.length > 1) {
                     WorldBankResponse paginationInfo = objectMapper.convertValue(response[0], WorldBankResponse.class);
-<<<<<<< HEAD
-                    List<DataModel> dataModelList = objectMapper.convertValue(response[1], objectMapper.getTypeFactory().constructCollectionType(List.class, DataModel.class));
+                    List<DataModel> gdpDataList = objectMapper.convertValue(response[1], objectMapper.getTypeFactory().constructCollectionType(List.class, DataModel.class));
 
-                    for (DataModel dataModel : dataModelList) {
-                        GdpModelDTO gdpModel = new GdpModelDTO(dataModel.getCountry().getValue(), dataModel.getDate(), dataModel.getValue());
-=======
-                    List<GdpData> gdpDataList = objectMapper.convertValue(response[1], objectMapper.getTypeFactory().constructCollectionType(List.class, GdpData.class));
-
-                    for (GdpData gdpData : gdpDataList) {
+                    for (DataModel gdpData : gdpDataList) {
                         GdpModelDTO gdpModel = new GdpModelDTO(gdpData.getCountry().getValue(), gdpData.getDate(), gdpData.getValue());
->>>>>>> feature/authentication
                         allGDPData.add(gdpModel);
                     }
 

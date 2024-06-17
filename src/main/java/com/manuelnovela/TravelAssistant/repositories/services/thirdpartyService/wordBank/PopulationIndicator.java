@@ -27,7 +27,7 @@ public class PopulationIndicator {
         while (true) {
             String url = WORLD_BANK_API_URL.replace("{countryCode}", countryCode) + "&page=" + currentPage;
             ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.GET, null, String.class);
-            if (responseEntity != null && responseEntity.getBody() != null) {
+            if (responseEntity.getBody() != null) {
                 String responseBody = responseEntity.getBody();
                 Object[] response = new Object[0];
                 try {

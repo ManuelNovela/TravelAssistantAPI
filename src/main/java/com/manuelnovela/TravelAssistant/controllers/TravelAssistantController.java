@@ -27,18 +27,11 @@ public class TravelAssistantController {
         return "Taxa de câmbio entre " + base_currency + " e " + target_currency;
     }
 
-<<<<<<< HEAD
     @GetMapping("/population/{country}")
     public ResponseEntity<RestResponseDTO> listCountryPopulation(@PathVariable @ValidCountryCode String country) {
         return travelAssistantService.listCountryPopulation(country);
     }
-=======
-    @GetMapping("/population/{city}")
-    public String getPopulation(@PathVariable String city) {
-        return "População de " + city;
-    }
 
->>>>>>> feature/authentication
     @GetMapping("/gdp/{country}")
     public ResponseEntity<RestResponseDTO> listCountryGDP(@PathVariable @ValidCountryCode String country) {
         return travelAssistantService.listCountryGDP(country);

@@ -24,7 +24,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TravelAssistantService extends BaseService{
     private final GdpIndicator gdpIndicator;
-<<<<<<< HEAD
     private final PopulationIndicator populationIndicator;
     public ResponseEntity<RestResponseDTO> listCountryGDP(String country){
         List<GdpModelDTO> result =  gdpIndicator.listCountryGDP(country);
@@ -39,21 +38,8 @@ public class TravelAssistantService extends BaseService{
         if(!result.isEmpty()){
             return ResponseEntity.ok(createSucessResponse(result));
         }else{
-            throw new RuntimeException("Erro fetching GDP");
+            throw new RuntimeException("Erro fetching population");
         }
     }
 
-=======
-    public ResponseEntity<RestResponseDTO> listCountryGDP(String country){
-
-        List<GdpModelDTO> result =  gdpIndicator.listCountryGDP(country);
-
-        if(!result.isEmpty()){
-            return ResponseEntity.ok(createSucessResponse(result));
-        }else{
-            throw new RuntimeException("Erro fetching GDP");
-        }
-
-    }
->>>>>>> feature/authentication
 }
