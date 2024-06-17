@@ -12,10 +12,13 @@ public class BaseController<T> {
         return result;
     }
 
+<<<<<<< Updated upstream:src/main/java/com/manuelnovela/TravelAssistant/controllers/BaseController.java
     public RestResponseDTO<T> createErrorResponse(T data)
     {
         RestResponseDTO result = new RestResponseDTO(ApiStatus.ERROR);
         result.setData(data);
         return result;
     }
+=======
+>>>>>>> Stashed changes:src/main/java/com/manuelnovela/TravelAssistant/repositories/services/BaseService.java
 }
