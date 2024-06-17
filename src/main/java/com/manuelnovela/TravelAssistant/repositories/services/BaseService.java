@@ -18,4 +18,11 @@ public class BaseService<T> {
         result.setData(data);
         return result;
     }
+
+    public RestResponseDTO<T> createErrorResponse(String mesage)
+    {
+        RestResponseDTO result = new RestResponseDTO(ApiStatus.ERROR);
+        result.setMessage(mesage);
+        return result;
+    }
 }

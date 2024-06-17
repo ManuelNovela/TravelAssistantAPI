@@ -29,9 +29,6 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body( new RestResponseDTO(ApiStatus.ERROR, exception.getMessage()));
     }
 
-    @ExceptionHandler(RuntimeException.class)
-    private ResponseEntity<RestResponseDTO> runtimeExceptionHandler(RuntimeException exception){
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body( new RestResponseDTO(ApiStatus.ERROR, exception.getMessage()));
-    }
+
 
 }

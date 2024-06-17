@@ -5,16 +5,16 @@ import com.manuelnovela.TravelAssistant.repositories.services.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/v1/auth")
 @Validated
 public class AuthController{
     @Autowired
@@ -29,4 +29,5 @@ public class AuthController{
     public ResponseEntity<RestResponseDTO> register (@Valid @RequestBody RegisterRequestDTO body){
         return authService.register(body);
     }
+
 }

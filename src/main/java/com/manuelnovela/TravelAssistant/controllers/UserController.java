@@ -14,11 +14,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/v1/user")
 public class UserController extends BaseService {
 
     @GetMapping
-    public ResponseEntity<RestResponseDTO> getUser(){
-        return ResponseEntity.ok(createSucessResponse("Pode ver mais informacao"));
+    public RestResponseDTO getUser(){
+        return createSucessResponse("Pode ver mais informacao");
     }
 }
