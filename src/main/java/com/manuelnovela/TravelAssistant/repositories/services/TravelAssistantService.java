@@ -1,6 +1,7 @@
 package com.manuelnovela.TravelAssistant.repositories.services;
 
 import com.manuelnovela.TravelAssistant.dtos.*;
+import com.manuelnovela.TravelAssistant.repositories.services.thirdpartyService.exchangeRate.ExchangeRateService;
 import com.manuelnovela.TravelAssistant.repositories.services.thirdpartyService.wordBank.GdpIndicator;
 import com.manuelnovela.TravelAssistant.repositories.services.thirdpartyService.wordBank.PopulationIndicator;
 import com.manuelnovela.TravelAssistant.dtos.GdpModelDTO;
@@ -16,6 +17,7 @@ import java.util.List;
 public class TravelAssistantService extends BaseService{
     private final GdpIndicator gdpIndicator;
     private final PopulationIndicator populationIndicator;
+    private final ExchangeRateService exchangeRateService;
     public ResponseEntity<RestResponseDTO> listCountryGDP(String country){
         List<GdpModelDTO> result =  gdpIndicator.listCountryGDP(country);
         if(!result.isEmpty()){
@@ -30,6 +32,14 @@ public class TravelAssistantService extends BaseService{
             return ResponseEntity.ok(createSucessResponse(result));
         }else{
             throw new RuntimeException("Erro fetching population");
+        }
+    }
+    public ResponseEntity<RestResponseDTO> getExchangeRates(String base_Currency, String target_currency){
+        ExchangeRateModelDTO result =  exchangeRateService.getExchangeRates(base_Currency, target_currency);
+        if(result != null){
+            return ResponseEntity.ok(createSucessResponse(result));
+        }else{
+            throw new RuntimeException("Erro fetching GDP");
         }
     }
 

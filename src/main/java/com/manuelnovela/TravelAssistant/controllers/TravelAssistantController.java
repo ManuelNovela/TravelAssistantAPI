@@ -1,10 +1,9 @@
 package com.manuelnovela.TravelAssistant.controllers;
 
-import com.manuelnovela.TravelAssistant.dtos.RegisterRequestDTO;
 import com.manuelnovela.TravelAssistant.dtos.RestResponseDTO;
 import com.manuelnovela.TravelAssistant.infrastructure.validator.interfaces.ValidCountryCode;
 import com.manuelnovela.TravelAssistant.repositories.services.TravelAssistantService;
-import jakarta.validation.Valid;
+import com.manuelnovela.TravelAssistant.repositories.services.thirdpartyService.exchangeRate.ExchangeRateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -16,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 public class TravelAssistantController {
     @Autowired
     private TravelAssistantService travelAssistantService;
+    @Autowired
+    ExchangeRateService exchangeRateService;
 
     @GetMapping("/weather/{city}")
     public String getWeather(@PathVariable String city) {
@@ -23,8 +24,8 @@ public class TravelAssistantController {
     }
 
     @GetMapping("/exchange-rate/{base_currency}/{target_currency}")
-    public String getExchangeRate(@PathVariable String base_currency, @PathVariable String target_currency) {
-        return "Taxa de câmbio entre " + base_currency + " e " + target_currency;
+    public ResponseEntity<RestResponseDTO> getExchangeRate(@PathVariable String base_currency, @PathVariable String target_currency) {
+        return travelAssistantService.getExchangeRates(base_currency, target_currency);
     }
 
     @GetMapping("/population/{country}")

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.manuelnovela.TravelAssistant.dtos.GdpModelDTO;
 import com.manuelnovela.TravelAssistant.repositories.services.thirdpartyService.wordBank.models.DataModel;
 import com.manuelnovela.TravelAssistant.repositories.services.thirdpartyService.wordBank.models.WorldBankResponse;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,8 @@ import java.util.List;
 
 @Service
 public class GdpIndicator {
-    private final String WORLD_BANK_API_URL = "http://api.worldbank.org/v2/country/{countryCode}/indicator/NY.GDP.MKTP.CD?format=json";
+    @Value("${world.bank.gdp.api.url}")
+    private String WORLD_BANK_API_URL;
     public List<GdpModelDTO> listCountryGDP(String countryCode) {
 
         List<GdpModelDTO> allGDPData = new ArrayList<>();

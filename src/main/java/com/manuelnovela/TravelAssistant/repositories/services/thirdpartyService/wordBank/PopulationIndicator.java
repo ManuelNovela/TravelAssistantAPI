@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.manuelnovela.TravelAssistant.dtos.PopulationModelDTO;
 import com.manuelnovela.TravelAssistant.repositories.services.thirdpartyService.wordBank.models.DataModel;
 import com.manuelnovela.TravelAssistant.repositories.services.thirdpartyService.wordBank.models.WorldBankResponse;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,8 @@ import java.util.List;
 
 @Service
 public class PopulationIndicator {
-    private final String WORLD_BANK_API_URL = "http://api.worldbank.org/v2/country/{countryCode}/indicator/SP.POP.TOTL?format=json";
+    @Value("${world.bank.population.api.url}")
+    private String WORLD_BANK_API_URL;
 
     public List<PopulationModelDTO> listCountryPopulation(String countryCode) {
 
