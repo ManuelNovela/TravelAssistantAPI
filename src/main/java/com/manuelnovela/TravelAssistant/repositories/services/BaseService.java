@@ -12,17 +12,12 @@ public class BaseService<T> {
         return result;
     }
 
-<<<<<<< Updated upstream:src/main/java/com/manuelnovela/TravelAssistant/controllers/BaseController.java
     public RestResponseDTO<T> createErrorResponse(T data)
     {
         RestResponseDTO result = new RestResponseDTO(ApiStatus.ERROR);
         result.setData(data);
         return result;
     }
-<<<<<<< HEAD:src/main/java/com/manuelnovela/TravelAssistant/controllers/BaseController.java
-=======
->>>>>>> Stashed changes:src/main/java/com/manuelnovela/TravelAssistant/repositories/services/BaseService.java
-=======
 
     public RestResponseDTO<T> createErrorResponse(String mesage)
     {
@@ -30,5 +25,4 @@ public class BaseService<T> {
         result.setMessage(mesage);
         return result;
     }
->>>>>>> feature/authentication:src/main/java/com/manuelnovela/TravelAssistant/repositories/services/BaseService.java
 }
