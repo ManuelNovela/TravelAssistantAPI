@@ -66,17 +66,20 @@ public class WeatherService {
                 List<ForecastDetailDTO> forecastToday = new ArrayList<>();
                 List<ForecastDetailDTO> forecastWeek = new ArrayList<>();
 
-                for (ForecastDetail item : list) {
+                for (int i = 0; i < list.size(); i++) {
+                    ForecastDetail item = list.get(i);
                     String dateTime = item.getDt_txt();
                     double temperature = item.getMain().getTemp();
                     String description = item.getWeather().get(0).getDescription();
 
                     ForecastDetailDTO forecastDetail = new ForecastDetailDTO(dateTime, temperature, description);
 
-                    if (isToday(dateTime)) {
+                    if (i < 5) {
                         forecastToday.add(forecastDetail);
                     } else {
-                        forecastWeek.add(forecastDetail);
+                        if (dateTime.contains("12:00:00")) {
+                            forecastWeek.add(forecastDetail);
+                        }
                     }
                 }
 
@@ -89,12 +92,6 @@ public class WeatherService {
         } catch (Exception e) {
             return new RestResponseDTO<>(ApiStatus.ERROR, "Error retrieving weather forecast: " + e.getMessage());
         }
-    }
-
-    private boolean isToday(String dateTime) {
-        LocalDate today = LocalDate.now();
-        LocalDate forecastDate = LocalDate.parse(dateTime.substring(0, 10));
-        return today.equals(forecastDate);
     }
 
 }

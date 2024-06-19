@@ -39,9 +39,14 @@ public class ExchangeRateService {
 
             double baseToEuroRate = 1 / exchangeRateResponse.getRates().get(base_Currency);
             double targetRate = exchangeRateResponse.getRates().get(target_currency);
-            double rateAmount = baseToEuroRate * targetRate;
+            double rateAmountBuy = baseToEuroRate * targetRate;
 
-            return new ExchangeRateModelDTO(base_Currency, target_currency,exchangeRateResponse.getDate(), rateAmount);
+            double baseToEuroRateReversal = 1 / exchangeRateResponse.getRates().get(target_currency);
+            double targetRateReversal = exchangeRateResponse.getRates().get(base_Currency);
+            double rateAmountSell = baseToEuroRateReversal * targetRateReversal;
+
+
+            return new ExchangeRateModelDTO(base_Currency, target_currency,exchangeRateResponse.getDate(), rateAmountBuy, rateAmountSell);
         } else {
             throw new RuntimeException("Failed to retrieve exchange rates");
         }
