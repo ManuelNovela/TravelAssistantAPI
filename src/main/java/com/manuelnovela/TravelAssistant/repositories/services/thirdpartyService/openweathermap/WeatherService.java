@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -51,7 +52,6 @@ public class WeatherService {
     }
 
     public RestResponseDTO<ForecastDTO> getWeatherForecast(String cityId) {
-
         String url = FORECAST_URL.replace("{cityId}", cityId).replace("{apikey}", apiKey);
         RestTemplate restTemplate = new RestTemplate();
 
@@ -60,17 +60,27 @@ public class WeatherService {
             if (responseEntity.getStatusCode().is2xxSuccessful()) {
                 ForecastResponse response = responseEntity.getBody();
                 String cityName = response.getCity().getName();
-
                 List<ForecastDetail> list = response.getList();
-                List<ForecastDetailDTO> forecastDetails = new ArrayList<>();
+
+                List<ForecastDetailDTO> forecastToday = new ArrayList<>();
+                List<ForecastDetailDTO> forecastWeek = new ArrayList<>();
+
                 for (ForecastDetail item : list) {
                     String dateTime = item.getDt_txt();
                     double temperature = item.getMain().getTemp();
                     String description = item.getWeather().get(0).getDescription();
-                    forecastDetails.add(new ForecastDetailDTO(dateTime, temperature, description));
+
+                    ForecastDetailDTO forecastDetail = new ForecastDetailDTO(dateTime, temperature, description);
+
+                    if (isToday(dateTime)) {
+                        forecastToday.add(forecastDetail);
+                    } else {
+                        forecastWeek.add(forecastDetail);
+                    }
                 }
 
-                ForecastDTO forecastDTO = new ForecastDTO(cityName, forecastDetails);
+                ForecastDTO forecastDTO = new ForecastDTO(cityName, forecastToday, forecastWeek);
+
                 return new RestResponseDTO<>(ApiStatus.SUCCESS, "Weather forecast retrieved successfully", forecastDTO);
             } else {
                 return new RestResponseDTO<>(ApiStatus.ERROR, "Failed to retrieve weather forecast");
@@ -79,4 +89,11 @@ public class WeatherService {
             return new RestResponseDTO<>(ApiStatus.ERROR, "Error retrieving weather forecast: " + e.getMessage());
         }
     }
+
+    private boolean isToday(String dateTime) {
+        LocalDate today = LocalDate.now();
+        LocalDate forecastDate = LocalDate.parse(dateTime.substring(0, 10));
+        return today.equals(forecastDate);
+    }
+
 }
