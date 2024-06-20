@@ -8,7 +8,7 @@ Aceitar cors do host e porta do frontend:
 @Override
 public void addCorsMappings(CorsRegistry registry){
 registry.addMapping("/**")
-.allowedOrigins("http://localhost:5173") //este hoste e porta que o frontend usa
+.allowedOrigins("http://localhost:5173") //este host e porta que o frontend usa
 .allowedMethods("GET", "POST");
 }
 }
