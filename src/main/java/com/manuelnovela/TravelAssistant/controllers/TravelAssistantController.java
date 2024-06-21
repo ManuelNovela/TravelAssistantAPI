@@ -7,6 +7,7 @@ import com.manuelnovela.TravelAssistant.infrastructure.validator.interfaces.Curr
 import com.manuelnovela.TravelAssistant.infrastructure.validator.interfaces.ValidCountryCode;
 import com.manuelnovela.TravelAssistant.repositories.services.TravelAssistantService;
 import com.manuelnovela.TravelAssistant.repositories.services.thirdpartyService.exchangeRate.ExchangeRateService;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,7 @@ public class TravelAssistantController {
     @Autowired
     private TravelAssistantService travelAssistantService;
 
+    @RateLimiter(name = "default")
     @GetMapping("/weather/current/{city}")
     @Cacheable(value = "weatherCache", key = "#city", unless = "#result == null")
     public ResponseEntity<RestResponseDTO> getCurrentWeather(@PathVariable String city) {
@@ -49,6 +51,7 @@ public class TravelAssistantController {
     public ResponseEntity<RestResponseDTO> listCountryGDP(@PathVariable @ValidCountryCode String country) {
         return travelAssistantService.listCountryGDP(country);
     }
+
 
     @GetMapping("/autocomplete/{name}")
     @Cacheable(value = "autocompleteCache", key = "#name", unless = "#result == null")
