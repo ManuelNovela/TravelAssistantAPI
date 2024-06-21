@@ -1,5 +1,6 @@
 package com.manuelnovela.TravelAssistant.controllers;
 
+import com.manuelnovela.TravelAssistant.dtos.PlaceAutocompleteResponseDTO;
 import com.manuelnovela.TravelAssistant.dtos.RestResponseDTO;
 import com.manuelnovela.TravelAssistant.dtos.WeatherDTO;
 import com.manuelnovela.TravelAssistant.infrastructure.validator.interfaces.CurrencyCode;
@@ -47,5 +48,11 @@ public class TravelAssistantController {
     @Cacheable(value = "gdpCache", key = "#country", unless = "#result == null")
     public ResponseEntity<RestResponseDTO> listCountryGDP(@PathVariable @ValidCountryCode String country) {
         return travelAssistantService.listCountryGDP(country);
+    }
+
+    @GetMapping("/autocomplete/{name}")
+    @Cacheable(value = "autocompleteCache", key = "#name", unless = "#result == null")
+    public ResponseEntity<RestResponseDTO> predictPlaces(@PathVariable String name) {
+        return travelAssistantService.predictPlaces(name);
     }
 }

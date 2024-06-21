@@ -18,7 +18,7 @@ public class CacheConfig {
 
     @Bean
     public CaffeineCacheManager cacheManager() {
-        CaffeineCacheManager cacheManager = new CaffeineCacheManager("exchangeRatesCache", "populationCache", "gdpCache", "weatherCache", "forecastCache");
+        CaffeineCacheManager cacheManager = new CaffeineCacheManager("exchangeRatesCache", "populationCache", "gdpCache", "weatherCache", "forecastCache", "autocompleteCache");
 
         LocalTime midnight = LocalTime.MIDNIGHT;
         LocalDateTime tomorrowMidnight = LocalDateTime.now().plusDays(1).with(midnight);
