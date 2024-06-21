@@ -1,4 +1,6 @@
 package com.manuelnovela.TravelAssistant.dtos;
 
-public record PopulationModelDTO(String country, String year, String value) {
+import java.math.BigDecimal;
+
+public record PopulationModelDTO(String country, String year, BigDecimal value) {
 }

@@ -41,8 +41,9 @@ public class WeatherService {
                 String cityName = response.getName();
                 Integer cityId = response.getId();
                 String country = response.getSys().getCountry();
+                String icon = response.getWeather().get(0).getIcon();
 
-                WeatherDTO weatherDTO = new WeatherDTO(country, cityId,cityName, temperature, description);
+                WeatherDTO weatherDTO = new WeatherDTO(country, cityId,cityName, temperature, description, icon);
                 return new RestResponseDTO<>(ApiStatus.SUCCESS, "Current weather retrieved successfully", weatherDTO);
             } else {
                 return new RestResponseDTO<>(ApiStatus.ERROR, "Failed to retrieve current weather");

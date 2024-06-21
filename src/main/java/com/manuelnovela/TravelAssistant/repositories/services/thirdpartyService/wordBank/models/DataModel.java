@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -24,7 +26,7 @@ public class DataModel {
     private String date;
 
     @JsonProperty("value")
-    private String value;
+    private BigDecimal value;
 
     @JsonProperty("unit")
     private String unit;
